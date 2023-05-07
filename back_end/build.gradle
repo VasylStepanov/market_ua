@@ -33,15 +33,27 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-flyway {
+task migrateDatabaseDev(type: org.flywaydb.gradle.task.FlywayMigrateTask){
 	def props = new Properties()
-	File propsFile = file("src/main/resources/application.properties")
+	File propsFile = file("src/main/resources/application-dev.properties")
 	props.load(new FileInputStream(propsFile));
 
 	url = props.get("spring.datasource.url")
 	user = props.get("spring.datasource.username")
 	password = props.get("spring.datasource.password")
 }
+
+
+task migrateDatabaseProd(type: org.flywaydb.gradle.task.FlywayMigrateTask){
+	def props = new Properties()
+	File propsFile = file("src/main/resources/application-prod.properties")
+	props.load(new FileInputStream(propsFile));
+
+	url = props.get("spring.datasource.url")
+	user = props.get("spring.datasource.username")
+	password = props.get("spring.datasource.password")
+}
+
 
 tasks.named('test') {
 	useJUnitPlatform()
