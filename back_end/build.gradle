@@ -25,6 +25,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
+	runtimeOnly 'org.flywaydb:flyway-core'
 	implementation 'org.postgresql:postgresql:42.5.1'
 	implementation 'com.h2database:h2:2.1.214'
 
@@ -36,28 +37,29 @@ dependencies {
 
 task migrateDatabaseDev(type: org.flywaydb.gradle.task.FlywayMigrateTask){
 	def props = new Properties()
-	File propsFile = file("src/main/resources/application-dev.properties")
+	File propsFile = file("src/main/resources/application.properties")
 	props.load(new FileInputStream(propsFile));
 
 	url = props.get("spring.datasource.url")
 	user = props.get("spring.datasource.username")
 	password = props.get("spring.datasource.password")
-	defaultSchema = "market_ua_flyway"
 }
 
 
 task migrateDatabaseProd(type: org.flywaydb.gradle.task.FlywayMigrateTask){
 	def props = new Properties()
-	File propsFile = file("src/main/resources/application-prod.properties")
+	File propsFile = file("src/main/resources/application.properties")
 	props.load(new FileInputStream(propsFile));
 
 	url = props.get("spring.datasource.url")
 	user = props.get("spring.datasource.username")
 	password = props.get("spring.datasource.password")
-	defaultSchema = "market_ua_flyway"
 }
 
 
 tasks.named('test') {
+	doFirst {
+		migrateDatabaseProd
+	}
 	useJUnitPlatform()
 }
