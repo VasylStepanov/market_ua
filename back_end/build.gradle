@@ -25,7 +25,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
-	runtimeOnly 'org.flywaydb:flyway-core'
+    runtimeOnly 'org.flywaydb:flyway-core'
 	implementation 'org.postgresql:postgresql:42.5.1'
 	implementation 'com.h2database:h2:2.1.214'
 
@@ -35,7 +35,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-task migrateDatabaseDev(type: org.flywaydb.gradle.task.FlywayMigrateTask){
+task migrateDatabaseProd(type: org.flywaydb.gradle.task.FlywayMigrateTask){
 	def props = new Properties()
 	File propsFile = file("src/main/resources/application.properties")
 	props.load(new FileInputStream(propsFile));
@@ -46,9 +46,9 @@ task migrateDatabaseDev(type: org.flywaydb.gradle.task.FlywayMigrateTask){
 }
 
 
-task migrateDatabaseProd(type: org.flywaydb.gradle.task.FlywayMigrateTask){
+task migrateDatabaseDev(type: org.flywaydb.gradle.task.FlywayMigrateTask){
 	def props = new Properties()
-	File propsFile = file("src/main/resources/application.properties")
+	File propsFile = file("src/test/resources/application.properties")
 	props.load(new FileInputStream(propsFile));
 
 	url = props.get("spring.datasource.url")

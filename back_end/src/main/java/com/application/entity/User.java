@@ -22,7 +22,6 @@ import java.util.UUID;
 public class User implements UserDetails {
 
     @Id
-    @Getter(AccessLevel.NONE)
     UUID id;
 
     @Column(name = "login")
@@ -32,7 +31,7 @@ public class User implements UserDetails {
     String password;
 
     @Column(name = "enabled")
-    boolean enabled;
+    Boolean enabled;
 
     @OneToOne(mappedBy = "user")
     UserProfile userProfile;
@@ -43,6 +42,18 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", userProfile=" + userProfile +
+                ", role=" + role +
+                '}';
     }
 
     @Override

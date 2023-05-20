@@ -1,9 +1,9 @@
 package com.application.service;
 
-import com.application.dto.UserRegistrationDTO;
-import com.application.exception.RegistrationException;
+import com.application.dto.UserAuthenticationDTO;
+import com.application.exception.AuthenticationException;
 
 public interface AuthenticationService {
 
-    void register(UserRegistrationDTO userDTO) throws RegistrationException;
+    void authentication(UserAuthenticationDTO userDTO) throws AuthenticationException;
 }
