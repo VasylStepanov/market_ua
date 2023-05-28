@@ -1,7 +1,10 @@
 package com.application.dto;
 
+import com.application.entity.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -11,7 +14,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserAuthenticationDTO {
 
-    String phoneNumberOrEmail;
-
-    String password;
+    UUID userId;
+    Role role;
+    Boolean enabled;
+    String login;
 }

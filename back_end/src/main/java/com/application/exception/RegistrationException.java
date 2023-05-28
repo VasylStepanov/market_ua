@@ -1,6 +1,6 @@
 package com.application.exception;
 
-public class RegistrationException extends Exception{
+public class RegistrationException extends ApiException{
 
     public RegistrationException(String message){
         super(message);

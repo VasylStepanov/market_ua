@@ -1,6 +1,5 @@
 package com.application.dto;
 
-import com.application.entity.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -10,14 +9,12 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserDTO {
-    String login;
-    Boolean enabled;
-    Role role;
+public class AuthRequestDTO {
 
-    String firstname;
-    String lastname;
-    String email;
+
     String phoneNumber;
 
+    String email;
+
+    String password;
 }

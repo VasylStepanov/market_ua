@@ -41,24 +41,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", enabled=" + enabled +
-                ", userProfile=" + userProfile +
-                ", role=" + role +
-                '}';
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
+        return role.getAuthorities();
     }
 
     @Override
@@ -83,6 +66,18 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", userProfile=" + userProfile +
+                ", role=" + role +
+                '}';
     }
 }
